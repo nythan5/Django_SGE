@@ -58,7 +58,7 @@
       "javascript": "javascriptreact",
       "typescript": "typescriptreact"
     },
-    "workbench.colorTheme": "Dracula",
+    "workbench.colorTheme": "Dracula Theme",
     "explorer.confirmDelete": false,
     "workbench.iconTheme": "material-icon-theme",
     "git.enableSmartCommit": true,

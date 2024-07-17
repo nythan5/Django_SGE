@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+
+{% block title %}Detalhe {{product.title}}{% endblock title %}
+
+{% block content %}
+
+  <div class="container mt-4">
+    <h3 class="display-6" >Detalhes do Produto</h3>
+    <div class="card">
+      <div class="card-body">
+        <h3 class="card-title">{{product.title}}</h3>
+        <p class="card-text"><i class="bi bi-box-seam"></i> Qtde. | {{product.quantity}}</p> 
+        <p class="card-text"><i class="bi bi-box-seam"></i> Marca | {{product.brand}}</p> 
+        <p class="card-text"><i class="bi bi-123"></i> Numerp de Série | {{product.serie_number}}</p> 
+        <p class="card-text"><i class="bi bi-cash-coin"></i> Preço de Custo | {{product.cost_price}}</p>
+        <p class="card-text"><i class="bi bi-currency-dollar"></i> Preço de Venda | {{product.selling_price}</p> 
+        <p class="card-text"><i class="bi bi-card-text"></i> Desc. | {{product.description}}</p>       
+      </div>
+    </div>
+    <a class="btn btn-secondary mt-3" href="{% url "product:list" %}">Voltar para lista</a>
+  </div>
+
+{% endblock content %}
