@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+
+{% block title %}Detalhe {{inflow.id}}{% endblock title %}
+
+{% block content %}
+
+  <div class="container mt-4">
+    <h3 class="display-6" >Detalhes da Entrada</h3>
+    <div class="card">
+      <div class="card-body">
+        <h3 class="card-title">{{inflow.product}}</h3>
+        <p class="card-text"><i class="bi bi-truck"></i> Forn. | {{inflow.supplier}}</p>
+        <p class="card-text"><i class="bi bi-box-seam"></i> Qtde. | {{inflow.quantity}}</p>  
+        <p class="card-text"><i class="bi bi-card-text"></i> Desc. | {{inflow.description}}</p>        
+      </div>
+    </div>
+    <a class="btn btn-secondary mt-3" href="{% url "inflow:list" %}">Voltar para lista</a>
+  </div>
+
+{% endblock content %}

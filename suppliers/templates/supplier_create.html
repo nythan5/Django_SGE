@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+
+{% block title %}Novo Fornecedor{% endblock title %}
+
+{% block content %}
+
+    <div class="container mt-4">
+        <h3 class='display-6'>Cadastrar Novo Fornecedor</h3>
+
+        <div class="card">
+            <div class="card-body">
+                <form method="POST" class="form">
+                    {% csrf_token %}
+                    {{ form.as_p }}
+                    <button type="submit" class="btn btn-primary">Salvar</button>
+                </form>
+            </div>
+        </div>
+        <a href="{% url "supplier:list" %}" class="btn btn-secondary mt-3">Voltar e Cancelar</a>
+    </div>
+
+{% endblock content %}
