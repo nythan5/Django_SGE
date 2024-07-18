@@ -49,8 +49,7 @@ def get_sales_metrics():
     return dict(
         total_sales=total_sales,
 
-        total_products_sold=number_format(
-            total_products_sold, decimal_pos=2, force_grouping=True),
+        total_products_sold=total_products_sold,
 
         total_sales_value=number_format(
             total_sales_value, decimal_pos=2, force_grouping=True),
