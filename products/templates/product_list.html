@@ -4,11 +4,16 @@
 
 {% block content %}
 
+  {% include "components/product_metrics.html" %}
+
+  <div class="mb-4"></div>
+
   <div class="row mb-3">
     <div class="col-md-6">
       <form method="GET" action="{% url "product:list" %}">
         <div class="input-group">
           <input type="text" class="form-control" name="title" placeholder="Título" value="{{request.GET.title}}">
+          <input type="text" class="form-control" name="serie_number" placeholder="Numero de Série" value="{{request.GET.serie_number}}">
           <button type="submit" class="btn btn-primary">
             <i class="bi bi-search"></i>
           </button>

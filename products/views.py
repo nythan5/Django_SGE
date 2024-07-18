@@ -4,6 +4,7 @@ from .models import Product
 from .forms import ProductForm
 from categories.models import Category
 from brands.models import Brand
+from project import metrics
 
 
 class ProductListView(ListView):
@@ -15,9 +16,21 @@ class ProductListView(ListView):
     def get_queryset(self):
         qs = super().get_queryset()
         title = self.request.GET.get('title')
+        category = self.request.GET.get('category')
+        brand = self.request.GET.get('brand')
+        ns = self.request.GET.get('serie_number')
 
         if title:
-            qs = qs.filter(name__icontains=title)
+            qs = qs.filter(title__icontains=title)
+
+        if ns:
+            qs = qs.filter(serie_number__icontains=ns)
+
+        if category:
+            qs = qs.filter(category__id=category)
+
+        if brand:
+            qs = qs.filter(brand__id=brand)
 
         return qs
 
@@ -25,6 +38,7 @@ class ProductListView(ListView):
         context = super().get_context_data(**kwargs)
         context['categories'] = Category.objects.all()
         context['brands'] = Brand.objects.all()
+        context['product_metrics'] = metrics.get_products_metrics()
         return context
 
 
