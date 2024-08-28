@@ -12,7 +12,7 @@ urlpatterns = [
     path('inflows/', include('inflows.urls')),
     path('outflows/', include('outflows.urls')),
     path('products/', include('products.urls')),
-    path('', views.home, name='home')
+    path('home/', views.home, name='home')
 
 
 ]
