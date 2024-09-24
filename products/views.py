@@ -5,7 +5,7 @@ from .forms import ProductForm
 from categories.models import Category
 from brands.models import Brand
 from project import metrics
-from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
 
 
 class ProductListView(LoginRequiredMixin, ListView):
@@ -13,6 +13,7 @@ class ProductListView(LoginRequiredMixin, ListView):
     template_name = 'product_list.html'
     context_object_name = 'products'
     paginate_by = 5
+    permission_required = 'products.view_product'
 
     def get_queryset(self):
         qs = super().get_queryset()
@@ -43,26 +44,30 @@ class ProductListView(LoginRequiredMixin, ListView):
         return context
 
 
-class ProductCreateView(LoginRequiredMixin, CreateView):
+class ProductCreateView(LoginRequiredMixin, PermissionRequiredMixin, CreateView):
     model = Product
     template_name = 'product_create.html'
     form_class = ProductForm
     success_url = reverse_lazy('product:list')
+    permission_required = 'products.add_product'
 
 
-class ProductDetailView(DetailView):
+class ProductDetailView(LoginRequiredMixin, PermissionRequiredMixin, DetailView):
     model = Product
     template_name = 'product_detail.html'
+    permission_required = 'products.view_product'
 
 
-class ProductUpdateView(LoginRequiredMixin, UpdateView):
+class ProductUpdateView(LoginRequiredMixin, PermissionRequiredMixin, UpdateView):
     model = Product
     template_name = 'product_update.html'
     success_url = reverse_lazy('product:list')
     form_class = ProductForm
+    permission_required = 'products.update_product'
 
 
-class ProductDeleteView(LoginRequiredMixin, DeleteView):
+class ProductDeleteView(LoginRequiredMixin, PermissionRequiredMixin, DeleteView):
     model = Product
     template_name = 'product_delete.html'
     success_url = reverse_lazy('product:list')
+    permission_required = 'products.delete_product'
