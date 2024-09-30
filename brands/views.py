@@ -2,7 +2,9 @@ from django.urls import reverse_lazy
 from django.views.generic import ListView, CreateView, DetailView, UpdateView, DeleteView
 from .models import Brand
 from .forms import BrandForm
+from .serializers import BrandSerializer
 from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
+from rest_framework.generics import ListCreateAPIView, RetrieveUpdateDestroyAPIView
 
 
 class BrandListView(LoginRequiredMixin, PermissionRequiredMixin, ListView):
@@ -41,7 +43,7 @@ class BrandUpdateView(LoginRequiredMixin, PermissionRequiredMixin, UpdateView):
     template_name = 'brand_update.html'
     success_url = reverse_lazy('brand:list')
     form_class = BrandForm
-    permission_required = 'brands.update_brand'
+    permission_required = 'brands.change_brand'
 
 
 class BrandDeleteView(LoginRequiredMixin, PermissionRequiredMixin, DeleteView):
@@ -49,3 +51,13 @@ class BrandDeleteView(LoginRequiredMixin, PermissionRequiredMixin, DeleteView):
     template_name = 'brand_delete.html'
     success_url = reverse_lazy('brand:list')
     permission_required = 'brands.delete_brand'
+
+
+class BrandCreateListAPIView(ListCreateAPIView):
+    queryset = Brand.objects.all()
+    serializer_class = BrandSerializer
+
+
+class BrandRetrieveUpdateDestroyAPIView(RetrieveUpdateDestroyAPIView):
+    queryset = Brand.objects.all()
+    serializer_class = BrandSerializer

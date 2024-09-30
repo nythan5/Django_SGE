@@ -6,6 +6,8 @@ from categories.models import Category
 from brands.models import Brand
 from project import metrics
 from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
+from rest_framework.generics import ListCreateAPIView, RetrieveUpdateDestroyAPIView
+from .serializers import ProductSerializer
 
 
 class ProductListView(LoginRequiredMixin, ListView):
@@ -63,7 +65,7 @@ class ProductUpdateView(LoginRequiredMixin, PermissionRequiredMixin, UpdateView)
     template_name = 'product_update.html'
     success_url = reverse_lazy('product:list')
     form_class = ProductForm
-    permission_required = 'products.update_product'
+    permission_required = 'products.change_product'
 
 
 class ProductDeleteView(LoginRequiredMixin, PermissionRequiredMixin, DeleteView):
@@ -71,3 +73,13 @@ class ProductDeleteView(LoginRequiredMixin, PermissionRequiredMixin, DeleteView)
     template_name = 'product_delete.html'
     success_url = reverse_lazy('product:list')
     permission_required = 'products.delete_product'
+
+
+class ProductCreateListAPIView(ListCreateAPIView):
+    queryset = Product.objects.all()
+    serializer_class = ProductSerializer
+
+
+class ProductRetrieveUpdateDestroyAPIView(RetrieveUpdateDestroyAPIView):
+    queryset = Product.objects.all()
+    serializer_class = ProductSerializer

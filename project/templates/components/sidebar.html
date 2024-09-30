@@ -14,42 +14,60 @@
                         <span class="ms-1">Dashboards</span>
                       </a>
                 </li>
-                <li>
-                    <a href="{% url "brand:list" %}" class="nav-link px-0 align-middle">
-                        <i class="bi bi-tags"></i>
-                        <span class="ms-1">Marcas</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="{% url "supplier:list" %}" class="nav-link px-0 align-middle">
-                        <i class="bi bi-truck"></i>
-                        <span class="ms-1">Fornecedores</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="{% url "category:list" %}" class="nav-link px-0 align-middle">
-                        <i class="bi bi-folder2-open"></i>
-                        <span class="ms-1">Categorias</span>
-                    </a>
-                </li>
+                {% if perms.brands.view_brand %}
+                    <li>
+                        <a href="{% url "brand:list" %}" class="nav-link px-0 align-middle">
+                            <i class="bi bi-tags"></i>
+                            <span class="ms-1">Marcas</span>
+                        </a>
+                    </li>
+                {% endif %}
+
+                {% if perms.suppliers.view_supplier %}
+                    <li>
+                        <a href="{% url "supplier:list" %}" class="nav-link px-0 align-middle">
+                            <i class="bi bi-truck"></i>
+                            <span class="ms-1">Fornecedores</span>
+                        </a>
+                    </li>
+                {% endif %}
+
+                {% if perms.categories.view_category %}
+                    <li>
+                        <a href="{% url "category:list" %}" class="nav-link px-0 align-middle">
+                            <i class="bi bi-folder2-open"></i>
+                            <span class="ms-1">Categorias</span>
+                        </a>
+                    </li>
+                {% endif %}
+
+                {% if perms.products.view_product %}
                 <li>
                     <a href="{% url "product:list" %}" class="nav-link px-0 align-middle">
                         <i class="bi bi-list-ul"></i>
                         <span class="ms-1">Produtos</span>
                     </a>
                 </li>
+                {% endif %}
+                
+                {% if perms.inflows.view_inflow %}
                 <li>
                     <a href="{% url "inflow:list" %}" class="nav-link px-0 align-middle">
                         <i class="bi bi-box-arrow-in-up-right"></i>
                         <span class="ms-1">Entradas</span>
                     </a>
                 </li>
+                {% endif %}
+
+                {% if perms.outflows.view_outflow %}
                 <li>
                     <a href="{% url "outflow:list" %}" class="nav-link px-0 align-middle">
                         <i class="bi bi-box-arrow-in-down-left"></i>
                         <span class="ms-1">Saídas</span>
                     </a>
                 </li>
+                {% endif %}
+                
                 <li class="nav-item">
                     {% if user.is_authenticated %}
                     <form action="{% url 'logout' %}" method="post" id="logout-form" class="nav-link px-0 align-middle">

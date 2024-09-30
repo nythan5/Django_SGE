@@ -15,12 +15,16 @@
         </div>
       </form>
     </div>
-    <div class="col-md-6">
-      <a href="{% url "inflow:create" %}" class="btn btn-success float-end" >
-        <i class="bi bi-plus"></i>
-        Cadastrar
-      </a>
-    </div>
+
+    {% if perms.inflows.add_inflow %}
+      <div class="col-md-6">
+        <a href="{% url "inflow:create" %}" class="btn btn-success float-end" >
+          <i class="bi bi-plus"></i>
+          Cadastrar
+        </a>
+      </div>
+    {% endif %}
+    
   </div>
 
   <div class="table-responsive">
