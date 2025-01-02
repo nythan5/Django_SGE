@@ -1,3 +1,6 @@
-venv
+# Ignorar arquivos compilados do Python
 *.pyc
 __pycache__/
+
+# Ignorar o ambiente virtual (se estiver no mesmo diretório do projeto)
+venv/
