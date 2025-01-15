@@ -44,6 +44,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'rest_framework',
     'rest_framework_simplejwt',
+    'django_celery_beat',
+    'django_celery_results',
 
 
     'ai',
@@ -162,3 +164,10 @@ SIMPLE_JWT = {
 
 OPENAI_API_KEY = os.getenv('OPENAI_API_KEY')
 OPENAI_MODEL = 'gpt-3.5-turbo'
+
+
+# Config Celery
+
+CELERY_BROKER_URL = 'pyamqp://guest@localhost//'
+CELERY_TIME_ZONE = 'America/Sao_Paulo'
+CELERY_RESULT_BACKEND = 'django-db'
